@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Demo - OpenClaw</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #000000, #1a1a2e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .badge {
+            background: #f0ad4e;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 15px 0;
+        }
+        button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+        }
+        button.pink {
+            background: #fe2c55;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .log {
+            background: #1e1e1e;
+            color: #0f0;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            text-align: left;
+            margin-top: 20px;
+            height: 100px;
+            overflow-y: auto;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🎬 TikTok Content Posting</h1>
+        <p>OpenClaw Social Media Agent</p>
+        
+        <div class="badge" id="statusBadge">🔐 Not Authenticated</div>
+        
+        <div id="userInfo" class="hidden" style="background:#e8f5e9; padding:10px; border-radius:10px; margin:10px 0;">
+            ✅ Logged in as: <span id="username">demo_user</span>
+        </div>
+        
+        <button id="loginBtn" onclick="doLogin()">🔑 Step 1: Login with TikTok</button>
+        
+        <div id="uploadSection" class="hidden">
+            <input type="file" id="videoFile" accept="video/*" onchange="fileSelected()">
+            <textarea id="description" placeholder="Write caption... #OpenClaw">Testing TikTok API! 🚀 #OpenClaw</textarea>
+            <button class="pink" id="uploadBtn" onclick="doUpload()" disabled>📤 Step 4: Post to TikTok</button>
+        </div>
+        
+        <div class="log" id="log">
+            [System] Ready for demo recording<br>
+            [System] Click Login to start
+        </div>
+        
+        <p style="font-size: 10px; color: #999; margin-top: 15px;">Demo for TikTok App Review</p>
+    </div>
+    
+    <script>
+        function addLog(msg) {
+            let log = document.getElementById('log');
+            log.innerHTML += '<br>[' + new Date().toLocaleTimeString() + '] ' + msg;
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        function doLogin() {
+            addLog('🔐 Login button clicked');
+            addLog('📱 Would open TikTok OAuth consent screen');
+            
+            setTimeout(() => {
+                document.getElementById('statusBadge').innerHTML = '✅ Authenticated';
+                document.getElementById('statusBadge').style.background = '#5cb85c';
+                document.getElementById('userInfo').classList.remove('hidden');
+                document.getElementById('uploadSection').classList.remove('hidden');
+                addLog('✅ Login successful! User: tiktok_demo_user');
+                addLog('📹 Ready for video upload');
+            }, 1000);
+        }
+        
+        function fileSelected() {
+            let file = document.getElementById('videoFile').files[0];
+            if (file) {
+                addLog('📁 Selected: ' + file.name + ' (' + (file.size/1024/1024).toFixed(2) + ' MB)');
+                document.getElementById('uploadBtn').disabled = false;
+                addLog('✅ Video ready to post');
+            }
+        }
+        
+        function doUpload() {
+            let desc = document.getElementById('description').value;
+            addLog('📤 Uploading to TikTok...');
+            addLog('📝 Caption: ' + desc.substring(0, 50));
+            
+            setTimeout(() => {
+                addLog('✅ Upload successful!');
+                addLog('🎉 Video posted to TikTok profile');
+                document.getElementById('uploadBtn').innerHTML = '✅ Posted!';
+                document.getElementById('uploadBtn').disabled = true;
+            }, 1500);
+        }
+        
+        addLog('📋 Demo ready for screen recording');
+        addLog('🎥 Record these 4 steps for TikTok review');
+    </script>
+</body>
+</html>
